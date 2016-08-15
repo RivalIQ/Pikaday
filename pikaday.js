@@ -296,6 +296,9 @@
         if (opts.isEndRange) {
             arr.push('is-endrange');
         }
+        if (opts.customClass) {
+            arr.push(opts.customClass);
+        }
         return '<td data-day="' + opts.day + '" class="' + arr.join(' ') + '">' +
                  '<button class="pika-button pika-day" type="button" ' +
                     'data-pika-year="' + opts.year + '" data-pika-month="' + opts.month + '" data-pika-day="' + opts.day + '">' +
@@ -989,6 +992,7 @@
                                  (opts.maxDate && day > opts.maxDate) ||
                                  (opts.disableWeekends && isWeekend(day)) ||
                                  (opts.disableDayFn && opts.disableDayFn(day)),
+                    customClass = (opts.customDayClassFn && opts.customDayClassFn(day)),
                     dayConfig = {
                         day: 1 + (i - before),
                         month: month,
@@ -999,7 +1003,9 @@
                         isEmpty: isEmpty,
                         isStartRange: isStartRange,
                         isEndRange: isEndRange,
-                        isInRange: isInRange
+                        isInRange: isInRange,
+                        showDaysInNextAndPreviousMonths: opts.showDaysInNextAndPreviousMonths,
+                        customClass: customClass
                     };
 
                 row.push(renderDay(dayConfig));
