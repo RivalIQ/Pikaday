@@ -723,8 +723,14 @@
                 date = max;
             }
 
-            this._d = new Date(date.getTime());
-            setToStartOfDay(this._d);
+            date  = new Date(date.getTime());
+            if (compareDates(this._d, date)) {
+                return;
+            }
+
+            setToStartOfDay(date);
+
+            this._d = date;
             this.gotoDate(this._d);
 
             if (this._o.field) {
